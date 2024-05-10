@@ -1,0 +1,17 @@
+<div class="form-container">
+  <form (ngSubmit)="submitForm()">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="formData.name" required>
+    </div>
+    <div>
+      <label for="mobile_no">Contact Information:</label>
+      <input type="text" id="mobile_no" name="mobile_no" [(ngModel)]="formData.mobile_no" required>
+    </div>
+    <div>
+      <label for="company_name">Company Name:</label>
+      <input type="text" id="company_name" name="company_name" [(ngModel)]="formData.company_name" required>
+    </div>
+    <button type="submit">Create</button>
+  </form>
+</div>

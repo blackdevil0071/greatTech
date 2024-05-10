@@ -1,0 +1,27 @@
+<!-- dealer-table.component.html -->
+<button mat-flat-button color="primary" (click)="openCreateDealerDialog()">Create Dealer</button>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Contact Information</th>
+      <th>Company Name</th>
+      <th>Action</th> <!-- New column for Edit button -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dealer of dealers">
+      <td>{{ dealer.id }}</td>
+      <td>{{ dealer.name }}</td>
+      <td>{{ dealer.mobile_no }}</td>
+      <td>{{ dealer.company_name }}</td>
+      <td>
+        <button (click)="editDealer(dealer)" class="edit-button">Edit</button>
+      </td> <!-- Button triggers editDealer method -->
+    </tr>
+  </tbody>
+</table>
+
+
+
