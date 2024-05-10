@@ -36,9 +36,8 @@ export class DealerService {
         })
       );
   }
-
   updateDealer(dealerId: number, updatedData: any): Observable<any> {
-    const url = `${this.apiUrl}${dealerId}/`;
+    const url = `${this.apiUrl}?id=${dealerId}`;
     return this.http.put<any>(url, updatedData, this.httpOptions)
       .pipe(
         catchError(error => {
@@ -49,7 +48,7 @@ export class DealerService {
   }
 
   deleteDealer(dealerId: number): Observable<any> {
-    const url = `${this.apiUrl}${dealerId}/`;
+    const url = `${this.apiUrl}?id=${dealerId}`;
     return this.http.delete<any>(url, this.httpOptions)
       .pipe(
         catchError(error => {

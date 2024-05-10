@@ -12,6 +12,6 @@
       <label for="company_name">Company Name:</label>
       <input type="text" id="company_name" name="company_name" [(ngModel)]="formData.company_name" required>
     </div>
-    <button type="submit">Create</button>
+    <button type="submit">{{ isEditing ? 'Update' : 'Create' }}</button>
   </form>
 </div>

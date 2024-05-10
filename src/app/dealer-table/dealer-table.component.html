@@ -7,7 +7,7 @@
       <th>Name</th>
       <th>Contact Information</th>
       <th>Company Name</th>
-      <th>Action</th> <!-- New column for Edit button -->
+      <th>Action</th> <!-- New column for Edit and Delete buttons -->
     </tr>
   </thead>
   <tbody>
@@ -18,10 +18,8 @@
       <td>{{ dealer.company_name }}</td>
       <td>
         <button (click)="editDealer(dealer)" class="edit-button">Edit</button>
-      </td> <!-- Button triggers editDealer method -->
+        <button (click)="deleteDealer(dealer.id)" id="danger">Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
-
-
-

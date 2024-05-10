@@ -9,26 +9,28 @@ import { DealerService } from '../dealer.service';
 })
 export class DealerFormDialogComponent {
   formData: any = {};
-
+  isEditing: boolean = false;
   constructor(
     private dealerService: DealerService,
     public dialogRef: MatDialogRef<DealerFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    // If data is provided, it means we're editing an existing dealer
-    if (data) {
-      this.formData = { ...data };
+    // If data is provided and is in edit mode
+    if (data && data.isEditing) {
+      this.formData = { ...data.dealer }; // Set the form data to the dealer data
+      this.isEditing = true; // Set the flag to indicate edit mode
     }
   }
 
+
   submitForm(): void {
-    if (this.formData.id) {
+    if (this.isEditing) {
       // Update existing dealer
       this.dealerService.updateDealer(this.formData.id, this.formData)
         .subscribe(
           () => {
             console.log('Dealer updated successfully');
-            this.dialogRef.close();
+            this.dialogRef.close(true); // Pass true to indicate update
           },
           error => {
             console.error('Error updating dealer:', error);
@@ -41,7 +43,7 @@ export class DealerFormDialogComponent {
         .subscribe(
           () => {
             console.log('Dealer created successfully');
-            this.dialogRef.close();
+            this.dialogRef.close(true); // Pass true to indicate creation
           },
           error => {
             console.error('Error creating dealer:', error);

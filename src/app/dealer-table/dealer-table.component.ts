@@ -31,17 +31,33 @@ export class DealerTableComponent implements OnInit {
   editDealer(dealer: any): void {
     const dialogRef = this.dialog.open(DealerFormDialogComponent, {
       width: '400px',
-      data: dealer
+      data: { dealer, isEditing: true } // Pass the dealer data and indicate edit mode
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       // Handle any actions after the dialog is closed
-      if (result) {
+      if (result === true) {
         this.loadDealers(); // Reload dealers after editing
       }
     });
   }
+
+  deleteDealer(dealerId: number): void {
+    if (confirm('Are you sure you want to delete this dealer?')) {
+      this.dealerService.deleteDealer(dealerId).subscribe(
+        () => {
+          console.log('Dealer deleted successfully');
+          this.loadDealers(); // Reload dealers after deletion
+        },
+        error => {
+          console.error('Error deleting dealer:', error);
+          // Handle error
+        }
+      );
+    }
+  }
+
 
   openCreateDealerDialog(): void {
     const dialogRef = this.dialog.open(DealerFormDialogComponent, {
