@@ -1,25 +1,47 @@
 <!-- dealer-table.component.html -->
-<button mat-flat-button color="primary" (click)="openCreateDealerDialog()">Create Dealer</button>
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Contact Information</th>
-      <th>Company Name</th>
-      <th>Action</th> <!-- New column for Edit and Delete buttons -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let dealer of dealers">
-      <td>{{ dealer.id }}</td>
-      <td>{{ dealer.name }}</td>
-      <td>{{ dealer.mobile_no }}</td>
-      <td>{{ dealer.company_name }}</td>
-      <td>
-        <button (click)="editDealer(dealer)" class="edit-button">Edit</button>
-        <button (click)="deleteDealer(dealer.id)" id="danger">Delete</button>
+<div class="table-container">
+  <button mat-raised-button color="primary" (click)="openCreateDealerDialog()">Create Dealer</button>
+  <table mat-table [dataSource]="dealers" class="mat-elevation-z8">
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let dealer">{{ dealer.id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let dealer">{{ dealer.name }}</td>
+    </ng-container>
+
+    <!-- Contact Information Column -->
+    <ng-container matColumnDef="contactInformation">
+      <th mat-header-cell *matHeaderCellDef>Contact Information</th>
+      <td mat-cell *matCellDef="let dealer">{{ dealer.mobile_no }}</td>
+    </ng-container>
+
+    <!-- Company Name Column -->
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell *matHeaderCellDef>Company Name</th>
+      <td mat-cell *matCellDef="let dealer">{{ dealer.company_name }}</td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let dealer">
+        <button mat-icon-button color="primary" (click)="editDealer(dealer)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteDealer(dealer.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </td>
-    </tr>
-  </tbody>
-</table>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <div *ngIf="message" class="message">{{ message }}</div>
+</div>

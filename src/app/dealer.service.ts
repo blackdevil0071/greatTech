@@ -36,6 +36,7 @@ export class DealerService {
         })
       );
   }
+
   updateDealer(dealerId: number, updatedData: any): Observable<any> {
     const url = `${this.apiUrl}?id=${dealerId}`;
     return this.http.put<any>(url, updatedData, this.httpOptions)

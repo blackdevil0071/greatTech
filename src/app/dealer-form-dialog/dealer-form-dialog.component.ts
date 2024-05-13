@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DealerService } from '../dealer.service';
 
@@ -9,7 +9,11 @@ import { DealerService } from '../dealer.service';
 })
 export class DealerFormDialogComponent {
   formData: any = {};
+  message: string = '';
   isEditing: boolean = false;
+
+  @Output() messageEmitter: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(
     private dealerService: DealerService,
     public dialogRef: MatDialogRef<DealerFormDialogComponent>,
@@ -22,7 +26,6 @@ export class DealerFormDialogComponent {
     }
   }
 
-
   submitForm(): void {
     if (this.isEditing) {
       // Update existing dealer
@@ -31,6 +34,8 @@ export class DealerFormDialogComponent {
           () => {
             console.log('Dealer updated successfully');
             this.dialogRef.close(true); // Pass true to indicate update
+            this.message = 'Dealer updated successfully';
+            this.messageEmitter.emit(this.message); // Emit message
           },
           error => {
             console.error('Error updating dealer:', error);
@@ -44,6 +49,8 @@ export class DealerFormDialogComponent {
           () => {
             console.log('Dealer created successfully');
             this.dialogRef.close(true); // Pass true to indicate creation
+            this.message = 'Dealer created successfully';
+            this.messageEmitter.emit(this.message); // Emit message
           },
           error => {
             console.error('Error creating dealer:', error);
@@ -52,4 +59,5 @@ export class DealerFormDialogComponent {
         );
     }
   }
+  
 }

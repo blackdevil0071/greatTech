@@ -14,6 +14,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DealerFormDialogComponent } from './dealer-form-dialog/dealer-form-dialog.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import {MatTableModule} from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,10 +29,12 @@ import {MatIconModule} from '@angular/material/icon';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatFormFieldModule,
     MatIconModule,
     FormsModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
