@@ -12,17 +12,7 @@ export class AppComponent implements OnInit{
   title = 'great';
   listcountry:any;
   constructor(private dealerService:DealerService){}
-   fetchCountry(){
-    this.dealerService.getDealers().subscribe(data=>{
-    this.listcountry = data
-    console.log('Countries fetched', this.listcountry)
-    })
-
-  }
-
-
 
   ngOnInit(): void {
   }
-
 }
